@@ -30,14 +30,14 @@ export default function Work() {
             transition={{ duration: 0.9, ease, delay: 0.9 }}
             className="mt-7 max-w-lg text-[17px] leading-relaxed text-[var(--muted)]"
           >
-            {projects.length} websites designed and developed for cafés, clinics, retailers and creative businesses. Open any project to explore the live site.
+            {projects.length ? "Explore a selection of our latest projects." : "Our portfolio is being updated. New work will be shared here soon."}
           </motion.p>
         </div>
       </section>
 
       <section className="pb-28 sm:pb-36">
         <div className="mx-auto w-full max-w-[1280px] px-5 sm:px-6 lg:px-8">
-          <motion.div
+          {projects.length > 0 && <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease, delay: 1 }}
@@ -63,7 +63,7 @@ export default function Work() {
                 </button>
               );
             })}
-          </motion.div>
+          </motion.div>}
 
           <motion.div layout className="mt-10 grid gap-x-6 gap-y-14 md:grid-cols-2">
             <AnimatePresence mode="popLayout">
@@ -87,7 +87,7 @@ export default function Work() {
                       src={p.image}
                       alt={p.title}
                       loading="lazy"
-                      className="aspect-[3/2] w-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.05]"
+                      className="aspect-[3/2] w-full object-contain transition-transform duration-[1.4s] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.05]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[var(--page)]/50 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                     <span className="absolute bottom-4 right-4 grid h-12 w-12 translate-y-3 place-items-center rounded-full bg-[var(--accent)] text-white opacity-0 shadow-lg transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 md:hidden">
@@ -108,11 +108,11 @@ export default function Work() {
 
           <div className="mt-28 flex flex-col items-center gap-6 rounded-[28px] border border-[var(--line)] bg-[var(--surface)] px-6 py-16 text-center">
             <h2 className="max-w-xl text-[clamp(1.9rem,3.6vw,3rem)] font-semibold leading-[1.05] tracking-[-0.045em]">
-              Your business could be <span className="text-gradient">next.</span>
+              Letâ€™s discuss <span className="text-gradient">your project.</span>
             </h2>
             <p className="max-w-md text-[15px] text-[var(--muted)]">Tell us about your goals and we'll shape a website around them.</p>
-            <Button to="/start-a-project">
-              Start a project <ArrowUpRight size={16} />
+            <Button to="/book-a-call">
+              Book a call <ArrowUpRight size={16} />
             </Button>
           </div>
         </div>

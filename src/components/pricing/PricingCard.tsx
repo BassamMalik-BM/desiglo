@@ -53,7 +53,7 @@ export default function PricingCard({ plan }: PricingCardProps) {
 
       <div className="mt-auto pt-8">
         <Link
-          to={"/start-a-project?plan=" + encodeURIComponent(plan.name)}
+          to={"/book-a-call?plan=" + encodeURIComponent(plan.name)}
           className={`group inline-flex w-full items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold transition ${
             plan.recommended
               ? "bg-[var(--accent)] text-[var(--ink)] hover:bg-[var(--accent-hover)]"

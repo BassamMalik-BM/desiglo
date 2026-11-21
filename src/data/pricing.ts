@@ -22,7 +22,7 @@ export const pricingPlans: PricingPlan[] = [
       "Simple animations",
       "Launch support",
     ],
-    cta: "Choose Basic",
+    cta: "Book a call",
   },
   {
     name: "Standard",
@@ -41,7 +41,7 @@ export const pricingPlans: PricingPlan[] = [
       "Launch support",
     ],
     recommended: true,
-    cta: "Choose Standard",
+    cta: "Book a call",
   },
   {
     name: "Premium",
@@ -60,7 +60,7 @@ export const pricingPlans: PricingPlan[] = [
       "Third-party integrations",
       "Priority launch support",
     ],
-    cta: "Choose Premium",
+    cta: "Book a call",
   },
   {
     name: "Custom",
@@ -79,6 +79,6 @@ export const pricingPlans: PricingPlan[] = [
       "Ongoing development",
       "Custom support options",
     ],
-    cta: "Request a Quote",
+    cta: "Book a call",
   },
 ];

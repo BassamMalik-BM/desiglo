@@ -51,12 +51,12 @@ export default function PricingTeaser() {
                 </ul>
                 <div className="mt-8">
                   {p.recommended ? (
-                    <Button to="/start-a-project" className="w-full">
-                      Get started <ArrowUpRight size={15} />
+                    <Button to="/book-a-call" className="w-full">
+                      Book a call <ArrowUpRight size={15} />
                     </Button>
                   ) : (
-                    <Button to="/start-a-project" variant="secondary" className="w-full">
-                      Get started
+                    <Button to="/book-a-call" variant="secondary" className="w-full">
+                      Book a call
                     </Button>
                   )}
                 </div>

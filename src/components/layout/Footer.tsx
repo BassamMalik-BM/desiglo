@@ -119,7 +119,7 @@ export default function Footer() {
             <span>Helpful links</span>
             <Link to="/faq">FAQs</Link>
             <Link to="/review">Leave a review</Link>
-            <Link to="/pay">Client payments</Link>
+            <Link to="/book-a-call">Book a call</Link>
           </div>
         </div>
 

@@ -1,0 +1,35 @@
+DESIGLO — PORTFOLIO AND SERVICES CORRECTION
+
+INSTALLATION — DO NOT MERGE THE OLD SRC FOLDER
+1. Keep a backup of your old project OUTSIDE the folder you deploy.
+2. Delete the existing src folder from your working project.
+3. Copy this ZIP's complete src folder into its place. This removes the previous portfolio images and retired payment pages instead of leaving them behind during a merge.
+4. Copy the root package and configuration files, then run npm install and npm run dev.
+Alternatively, extract this complete project into a NEW folder and work there.
+
+src/assets/work must now contain exactly two folders:
+  inkblade/hero.png
+  aicadmia/hero.png
+The supplied images are used unchanged. InkBlade links to https://inkblade.xyz; Aicadmia links to https://aicadmia.com.
+Both appear in the home hero, featured work, and Work page. Project stats use the new entries.
+
+SERVICES
+Eight broad service groups each have an explanation, three practical deliverables, and guidance on who the service suits. Website design, development, landing pages, and redesign are grouped together. Separate repeated overview/detail sections are not used.
+Existing individual service URLs remain available. Book a call and the payment removal from the previous update remain in place.
+
+PAYMENT CLEANUP IF UPDATING THE OLD REPOSITORY
+Remove these retired files if they remain outside src:
+  api/get-payment-request.ts
+  api/start-safepay-payment.ts
+  api/safepay-webhook.ts
+  api/transaction-report.ts
+  scripts/create-payment-request.ts
+  public/invoice/desiglo-invoice-bg.png
+Keep unrelated API files and review data. Keep any old private receipts outside your deployed website if you need them for records.
+This update does not alter live Vercel, Safepay, or Supabase settings.
+
+CONFIGURATION
+Retain your existing Formspree form ID and the public Supabase settings used for reviews. No environment credentials are included. Calls are requested through the existing form and confirmed manually by email.
+
+VALIDATION
+TypeScript/Vite build and rendering checks passed. No live form submission or deployment was made. Browser-level visual review remains to be done locally.

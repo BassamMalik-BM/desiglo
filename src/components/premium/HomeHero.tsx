@@ -8,8 +8,10 @@ import { bootDelay } from "../fx/Chrome";
 import { projects } from "../../data/projects";
 import { ease } from "../../lib/motion";
 
-// Three columns of real project screenshots, duplicated for a seamless loop
-const cols = [0, 1, 2].map((c) => projects.filter((_, i) => i % 3 === c));
+// The same animated wall can display new portfolio entries when they are ready.
+const wallItems = projects.length ? projects : ["Websites", "Mobile apps", "Online stores", "Brand identity", "Digital marketing", "Custom software"].map((title, i) => ({ slug: `service-${i}`, title, image: "", url: "/services" }));
+const wallSequence = Array.from({ length: Math.max(6, wallItems.length) }, (_, i) => wallItems[i % wallItems.length]);
+const cols = [0, 1, 2].map((c) => wallSequence.filter((_, i) => i % 3 === c));
 
 export default function HomeHero() {
   const ref = useRef<HTMLElement>(null);
@@ -66,14 +68,14 @@ export default function HomeHero() {
                   <a
                     key={p.slug + i}
                     href={p.url}
-                    target="_blank"
+                    target={p.image ? "_blank" : undefined}
                     rel="noopener noreferrer"
                     tabIndex={i >= col.length ? -1 : 0}
                     aria-hidden={i >= col.length}
-                    data-cursor="Visit"
+                    data-cursor={p.image ? "Visit" : "Explore"}
                     className="group mb-5 block overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)] shadow-[0_30px_60px_-20px_var(--card-shadow)]"
                   >
-                    <img src={p.image} alt={i >= col.length ? "" : p.title} loading={i < 2 ? "eager" : "lazy"} className="aspect-[3/2] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    {p.image ? <img src={p.image} alt={i >= col.length ? "" : p.title} loading={i < 2 ? "eager" : "lazy"} className="aspect-[3/2] w-full object-cover transition-transform duration-700 group-hover:scale-105" /> : <div className="aspect-[3/2] bg-gradient-to-br from-[var(--accent-soft)] to-[var(--surface)] p-6"><div aria-hidden="true" className="mb-5 flex gap-1.5">{[0,1,2].map(n => <span key={n} className="h-2 w-2 rounded-full bg-[var(--accent)]/40" />)}</div><div aria-hidden="true" className="mb-4 grid grid-cols-3 gap-2"><span className="col-span-2 h-14 rounded-lg bg-[var(--accent)]/20" /><span className="h-14 rounded-lg border border-[var(--line)]" /></div><p className="text-lg font-semibold text-[var(--ink)]">{p.title}</p></div>}
                   </a>
                 ))}
               </div>
@@ -120,11 +122,11 @@ export default function HomeHero() {
             transition={{ duration: 0.9, ease, delay: D + 0.85 }}
             className="mt-10 flex flex-wrap items-center gap-3"
           >
-            <Button to="/start-a-project">
-              Let's build something <ArrowUpRight size={16} />
+            <Button to="/book-a-call">
+              Book a call <ArrowUpRight size={16} />
             </Button>
-            <Link to="/work" className="group inline-flex items-center gap-2 px-4 py-3 text-[14px] font-semibold text-[var(--ink)]">
-              Explore our work
+            <Link to={projects.length ? "/work" : "/services"} className="group inline-flex items-center gap-2 px-4 py-3 text-[14px] font-semibold text-[var(--ink)]">
+              {projects.length ? "Explore our work" : "Explore our services"}
               <ArrowDown size={16} className="transition-transform duration-300 group-hover:translate-y-0.5" />
             </Link>
           </motion.div>
@@ -144,7 +146,7 @@ export default function HomeHero() {
         </div>
 
         {/* Mobile: horizontal strip of projects */}
-        <motion.div
+        {projects.length > 0 && <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease, delay: D + 0.9 }}
@@ -152,10 +154,10 @@ export default function HomeHero() {
         >
           <div className="flex w-max animate-[dg-marquee_40s_linear_infinite] gap-4">
             {[...projects.slice(0, 8), ...projects.slice(0, 8)].map((p, i) => (
-              <img key={i} src={p.image} alt={i < 8 ? p.title : ""} className="h-40 w-auto rounded-xl border border-[var(--line)]" loading="lazy" />
+              <img key={i} src={p.image} alt={i < Math.min(8, projects.length) ? p.title : ""} className="h-40 w-auto rounded-xl border border-[var(--line)]" loading="lazy" />
             ))}
           </div>
-        </motion.div>
+        </motion.div>}
       </motion.div>
 
     </section>

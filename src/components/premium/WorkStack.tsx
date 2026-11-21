@@ -11,6 +11,8 @@ export default function WorkStack() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const n = featuredProjects.length;
 
+  if (!n) return null;
+
   return (
     <section id="work" className="relative py-28 sm:py-36">
       <div className="mx-auto w-full max-w-[1280px] px-5 sm:px-6 lg:px-8">
@@ -24,7 +26,7 @@ export default function WorkStack() {
           </div>
           <div className="flex flex-col items-start gap-5 md:items-end">
             <p className="max-w-xs text-[15px] leading-relaxed text-[var(--muted)] md:text-right">
-              {projects.length} websites across cafés, healthcare, retail and creative businesses.
+              {projects.length} websites across cafÃ©s, healthcare, retail and creative businesses.
             </p>
             <Button to="/work" variant="secondary">
               View all work <ArrowUpRight size={16} />
@@ -58,7 +60,7 @@ function StackCard({ project: p, i, n, progress }: { project: Project; i: number
         className="group relative grid h-full w-full origin-top overflow-hidden rounded-[28px] border border-[var(--line)] bg-[var(--surface)] shadow-[0_-30px_80px_-30px_var(--card-shadow)] lg:grid-cols-[1.5fr_1fr]"
       >
         <div className="relative overflow-hidden bg-[#f3efe9]">
-          <img src={p.image} alt={p.title} loading="lazy" className="h-full w-full object-cover object-center transition-transform duration-[1.4s] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.04]" />
+          <img src={p.image} alt={p.title} loading="lazy" className="h-full w-full object-contain object-center transition-transform duration-[1.4s] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.04]" />
         </div>
         <div className="relative flex flex-col justify-between gap-6 p-7 sm:p-10">
           <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--accent)]/15 blur-[80px] transition-opacity duration-700 group-hover:opacity-100 lg:opacity-50" />

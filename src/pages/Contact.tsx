@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 import { useForm, ValidationError } from "@formspree/react";
 import Button from "../components/common/Button";
-export default function Contact({ project = false }: { project?: boolean }) {
+export default function Contact({ project = false, booking = false }: { project?: boolean; booking?: boolean }) {
   const [params] = useSearchParams();
   const [state, submit, reset] = useForm(
     import.meta.env.VITE_FORMSPREE_FORM_ID || "mljrllee",
@@ -25,10 +25,10 @@ export default function Contact({ project = false }: { project?: boolean }) {
     <section className="project-form-page dg-container">
       <div className="project-form-header">
         <p className="eyebrow">
-          {project ? "START A PROJECT" : "LET’S CONNECT"}
+          {booking ? "BOOK A CALL" : project ? "START A PROJECT" : "LET’S CONNECT"}
         </p>
         <h1>
-          {project ? (
+          {booking ? <>Let’s talk about<br />your next project.</> : project ? (
             <>
               Your next chapter
               <br />
@@ -43,8 +43,7 @@ export default function Contact({ project = false }: { project?: boolean }) {
           )}
         </h1>
         <p>
-          Tell us a little about your business and what you have in mind. We’ll
-          take it from there.
+          {booking ? "Share a few details and your preferred time. We’ll email you to agree a time and send the call details." : "Tell us a little about your business and what you have in mind. We’ll take it from there."}
         </p>
       </div>
       <div className="inquiry-grid">
@@ -55,9 +54,9 @@ export default function Contact({ project = false }: { project?: boolean }) {
             understand where you are and where you want to go.
           </p>
           {[
-            "Share your goals and requirements",
-            "Discuss the right approach",
-            "Receive a tailored scope and estimate",
+            booking ? "Send your preferred time and timezone" : "Share your goals and requirements",
+            booking ? "Receive a time confirmation by email" : "Discuss the right approach",
+            booking ? "Talk through your project and next steps" : "Receive a tailored scope and estimate",
           ].map((s, i) => (
             <div className="inquiry-step" key={s}>
               <span>0{i + 1}</span>
@@ -76,13 +75,12 @@ export default function Contact({ project = false }: { project?: boolean }) {
           {state.succeeded ? (
             <div className="form-success" role="status">
               <CheckCircle2 size={42} />
-              <h2>Thanks for reaching out.</h2>
+              <h2>{booking ? "Call request sent." : "Thanks for reaching out."}</h2>
               <p>
-                Your inquiry has been sent. We’ll review the details and reply
-                using the email address you provided.
+                {booking ? "We’ll reply by email to confirm a suitable time. Your call is not booked until we confirm it." : "Your inquiry has been sent. We’ll review the details and reply using the email address you provided."}
               </p>
               <Button onClick={() => reset()} variant="secondary">
-                Send another inquiry
+                {booking ? "Request another call" : "Send another inquiry"}
               </Button>
             </div>
           ) : (
@@ -90,7 +88,7 @@ export default function Contact({ project = false }: { project?: boolean }) {
               <input
                 type="hidden"
                 name="source"
-                value={project ? "Project inquiry" : "Contact inquiry"}
+                value={booking ? "Call request" : project ? "Project inquiry" : "Contact inquiry"}
               />
               <input
                 type="text"
@@ -145,10 +143,12 @@ export default function Contact({ project = false }: { project?: boolean }) {
                     <option value="" disabled>
                       Select a service
                     </option>
-                    <option>Website Design</option>
-                    <option>Website Development</option>
-                    <option>Business Website</option>
-                    <option>Landing Page</option>
+                    <option>Website Design & Development</option>
+                    <option>Mobile Apps</option>
+                    <option>Brand Identity</option>
+                    <option>SEO</option>
+                    <option>Digital Marketing</option>
+                    <option>Custom Software</option>
                     <option>E-commerce</option>
                     <option>Website Redesign</option>
                     <option>Maintenance</option>
@@ -178,6 +178,11 @@ export default function Contact({ project = false }: { project?: boolean }) {
                     <option>Not sure yet</option>
                   </select>
                 </label>
+                {booking && <>
+                  <label>Preferred day and time *<input name="preferred_time" required maxLength={200} placeholder="e.g. Tuesday afternoon, or any weekday" /></label>
+                  <label>Timezone or city *<input name="timezone" required maxLength={100} placeholder="e.g. Karachi (UTC+5)" /></label>
+                </>}
+                {selected && <input type="hidden" name="selected_plan" value={selected} />}
                 <label className="form-wide">
                   Ideal timeline
                   <select name="timeline" defaultValue="">
@@ -220,11 +225,11 @@ export default function Contact({ project = false }: { project?: boolean }) {
               )}
               <ValidationError errors={state.errors} className="form-error" />
               <Button type="submit" disabled={state.submitting}>
-                {state.submitting ? "Sending inquiry…" : "Send inquiry"}
+                {state.submitting ? "Sending…" : booking ? "Request a call" : "Send inquiry"}
                 <ArrowUpRight size={17} />
               </Button>
               <p className="form-note">
-                No commitment required. Fields marked * are required.
+                {booking ? "No payment required. We’ll confirm availability by email. Fields marked * are required." : "No commitment required. Fields marked * are required."}
               </p>
             </form>
           )}

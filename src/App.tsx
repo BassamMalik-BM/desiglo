@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import SiteLayout from "./components/layout/SiteLayout";
 
@@ -18,10 +18,6 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const Review = lazy(() => import("./pages/ReviewPage"));
 const Reviews = lazy(() => import("./pages/Reviews"));
 
-const Pay = lazy(() => import("./pages/Pay"));
-const PaymentRequest = lazy(() => import("./pages/PaymentRequest"));
-const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
-const PaymentFailed = lazy(() => import("./pages/PaymentFailed"));
 
 const PrivacyPolicy = lazy(() => import("./pages/legal/PrivacyPolicy"));
 const Terms = lazy(() => import("./pages/legal/Terms"));
@@ -59,17 +55,9 @@ export default function App() {
             <Route path="/review" element={<Review />} />
             <Route path="/reviews" element={<Reviews />} />
 
-            {/* Payment routes */}
-            <Route path="/pay" element={<Pay />} />
-
-            <Route
-              path="/pay/:transactionNumber"
-              element={<PaymentRequest />}
-            />
-
-            <Route path="/payment/success" element={<PaymentSuccess />} />
-
-            <Route path="/payment/failed" element={<PaymentFailed />} />
+            <Route path="/book-a-call" element={<Contact booking />} />
+            <Route path="/pay/*" element={<Navigate to="/book-a-call" replace />} />
+            <Route path="/payment/*" element={<Navigate to="/book-a-call" replace />} />
 
             {/* Legal */}
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />

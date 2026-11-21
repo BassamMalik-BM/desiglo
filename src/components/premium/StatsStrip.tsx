@@ -19,12 +19,13 @@ const categories = new Set(projects.map((p) => p.category)).size;
 
 const stats = [
   { n: projects.length, s: "", label: "Websites designed & built" },
-  { n: categories, s: "", label: "Industries served" },
-  { n: 7, s: "", label: "Services under one roof" },
+  { n: categories, s: "", label: "Project categories" },
+  { n: 8, s: "", label: "Services under one roof" },
   { n: 100, s: "%", label: "Responsive on every screen" },
 ];
 
 export default function StatsStrip() {
+  if (!projects.length) return null;
   return (
     <section className="border-y border-[var(--line)] bg-[var(--surface)]/40">
       <div className="mx-auto grid w-full max-w-[1280px] grid-cols-2 px-5 sm:px-6 lg:grid-cols-4 lg:px-8">

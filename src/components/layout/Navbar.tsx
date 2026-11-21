@@ -89,10 +89,10 @@ export default function Navbar() {
             <div className="hidden sm:block">
             <Magnetic>
               <Link
-                to="/start-a-project"
+                to="/book-a-call"
                 className="group inline-flex items-center gap-2 rounded-xl bg-[var(--ink)] px-4 py-2.5 text-[13px] font-semibold text-[var(--page)] transition hover:opacity-90"
               >
-                Start a project
+                Book a call
                 <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </Magnetic>
@@ -147,8 +147,8 @@ export default function Navbar() {
               </ul>
             </nav>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55, ease }}>
-              <Link to="/start-a-project" className="dg-button dg-button--primary w-full">
-                Start a project <ArrowUpRight size={16} />
+              <Link to="/book-a-call" className="dg-button dg-button--primary w-full">
+                Book a call <ArrowUpRight size={16} />
               </Link>
             </motion.div>
           </motion.div>

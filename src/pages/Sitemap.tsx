@@ -15,7 +15,7 @@ export default function Sitemap() {
           "Contact",
           "Start a project",
           "Review",
-          "Pay",
+          "Book a call",
           "Privacy policy",
           "Terms",
           "Cookie policy",
