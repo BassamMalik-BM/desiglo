@@ -1,5 +1,5 @@
-import inkbladeHero from "../assets/work/inkblade/hero.png";
-import aicadmiaHero from "../assets/work/aicadmia/hero.png";
+import inkbladeHero from "../assets/work/inkblade/hero.webp";
+import aicadmiaHero from "../assets/work/aicadmia/hero.webp";
 
 /** Add your latest projects here; set featured: true to show them on the home page. */
 export type Project = {
